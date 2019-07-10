@@ -14,8 +14,6 @@ services:
             - target: 80
               protocol: tcp
               published: 80
-        networks:
-            - myapp
     server:
         build:
             context: ./server
@@ -25,8 +23,6 @@ services:
               published: 8080
         depends_on:
             - mongo
-        networks:
-            - myapp
     client:
         build:
             context: ./client
@@ -37,14 +33,10 @@ services:
             - mongo
         environment:
             - REACT_APP_SERVICE_HOST=${REACT_APP_SERVICE_HOST}
-        networks:
-            - myapp
     mongo:
         image: mongo:latest
         expose:
             - '27017'
-        networks:
-            - myapp
     mongo-seed:
         image: fvilers/mongo-seed:1.0.0
         environment:
@@ -54,6 +46,4 @@ services:
             - ./data:/data
         command:
             - 'mongoimport --host mongo --port 27017 --db test --mode upsert --type json --file /data/account.json --jsonArray'
-networks:
-    myapp:
 
