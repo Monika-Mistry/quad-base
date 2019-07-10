@@ -5,7 +5,7 @@ COPY . .
 RUN mvn clean package
 FROM java:8
 WORKDIR /opt/app
-COPY --from=maven-build ./target/Spring_Day_Two.jar app.jar
+COPY --from=maven-build ./target/Spring_Day_Two-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["/usr/bin/java", "-jar", "app.jar"]
 
