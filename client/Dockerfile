@@ -13,4 +13,4 @@ COPY --from=node-build /build .
 # run the command to download dependacies - but append it with -g serve
 RUN npm install -g serve
 # create an entrypoint instruction - it will take 3 arguments "serve"(make sure you get the correct location), "-l", and a port number
-ENTRYPOINT ["serve","-l","3000"]
+ENTRYPOINT ["/usr/local/bin/serve","-l","3000"]

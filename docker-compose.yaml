@@ -21,11 +21,16 @@ services:
             - target: 8080
               protocol: tcp
               published: 8080
+        depends_on:
+            - mongo
     client:
         build:
             context: ./client
         expose:
             - '3000'
+        depends_on:
+            - server
+            - mongo
         environment:
             - REACT_APP_SERVICE_HOST=${REACT_APP_SERVICE_HOST}
     mongo:
